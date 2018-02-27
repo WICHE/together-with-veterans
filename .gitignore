@@ -7,5 +7,6 @@ sites/*/files
 sites/*/private
 sites/*/.sass-cache/
 
+
 *.sql
 
