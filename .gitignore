@@ -5,7 +5,11 @@ sites/*/settings*.php
 # Ignore paths that contain user-generated content.
 sites/*/files
 sites/*/private
+<<<<<<< HEAD
 sites/*/.sass-cache/
+=======
+sites/*/.sass-cache
+>>>>>>> d41d0d27582a44a7e5aa73cc9fa1523404a5916c
 
 *.sql
 
