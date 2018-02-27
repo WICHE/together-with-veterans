@@ -1,0 +1,548 @@
+/**
+ * @file
+ * Positioning for a responsive layout.
+ *
+ * Define CSS classes to create a fluid grid layout with optional sidebars
+ * depending on whether blocks are placed in the left or right sidebars.
+ *
+ * This layout uses the Zen Grids plugin for Compass: http://zengrids.com
+ */
+
+// We are going to create a fluid grid with 1, 3, or 5 columns and 20px gutters
+// between columns (applied as 10px of left/right padding on each column).
+$zen-column-count:  1;
+$zen-gutter-width:  20px;
+
+// If you need IE6/7 support for box-sizing: border-box (default), see _init.scss
+//$zen-box-sizing: content-box;
+
+// You can generate more efficient CSS if you manually apply the
+// zen-grid-item-base mixin to all grid items from within a single ruleset.
+$zen-auto-include-item-base: false;
+// $zen-auto-include-flow-item-base: false;
+
+// Suppress this section of CSS for RTL layouts since it contains no LTR-specific styles.
+@if $zen-reverse-all-floats == false {
+
+/**
+ * Center the page.
+ *
+ * For screen sizes larger than 1200px, prevent excessively long lines of text
+ * by setting a max-width.
+ */
+#page,
+.region-bottom {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+}
+
+body{
+	background:url(../images/dashed-circle.png) no-repeat 0 0;
+}
+/* Apply the shared properties of grid items in a single, efficient ruleset. */
+#content,
+.region-sidebar-first,
+.region-sidebar-second,
+#footer {
+  // See the note about $zen-auto-include-item-base above.
+  @include zen-grid-item-base();
+}
+
+
+
+/* Containers for grid items and flow items. */
+#header,
+#top-banner,
+#main,
+#footer {
+  @include zen-grid-container();
+}
+
+#footer {
+	background:none;
+	border-top:2px solid #003366;
+	margin-top:16px;
+	
+	p{
+		color:#000;
+		font-size:.8em;
+		line-height:1.2em;
+		text-align:left;
+	
+		a:link, a:visited, a:active{
+			text-decoration:underline;
+			color:#003366;
+		}
+	}
+}
+
+
+
+} // End of @if $zen-reverse-all-floats == true
+
+
+/*table styling*/
+#main{
+		.view-veterans-resources{
+			table{
+				width:98%;
+				font-size:.8em;
+				line-height:1em;
+				border:1px solid #666;
+				margin:0 auto 18px auto;
+				
+				caption{
+					background:#0096d3;
+					font-weight:600;
+					text-transform:uppercase;
+					color:#fff;
+					line-height:2em;
+					letter-spacing:1px;
+				}
+				tr th{
+					background:#000;
+					color:#fff;
+					font-weight:400;
+					padding:4px;
+					border-top:1px solid #666;
+				}
+				tr.even{
+					background:rgba(0, 150, 211, .03);
+					border-bottom:1px solid #666;
+					td{
+						padding:6px 16px 6px;
+							border-left:1px solid #666;
+							border-right:1px solid #666;
+					}
+				}
+				
+				tr.odd{
+					background:none;
+					border-bottom:1px solid #666;
+						td{
+							padding:6px 16px 6px;
+							border-left:1px solid #666;
+							border-right:1px solid #666;
+						}
+				}
+			}
+		}
+	}
+
+/**
+ * Use 3 grid columns for smaller screens.
+ */
+ 
+ @media all and (max-width: 480px) {
+	
+	#header{
+		margin-bottom:8px;
+		padding-bottom:4px;
+		margin-top:6px;
+		height:100px;
+	
+	.region-search{
+		left: 10px;
+		position: absolute;
+		top: 72px;
+		width: 195px;
+		
+		.block{
+			margin-bottom:0;
+		}
+		
+		.form-item{
+			margin:0;
+		}
+		
+		input#edit-submit{
+			position:relative;
+			top:7px;
+		}
+	}
+	
+	.header__name-and-slogan {
+			.header__site-name {
+				font-size: 1.5em;
+				line-height: 1em;
+				margin-top:0;
+			}
+				position:absolute;
+				top:0;
+				left:10px;
+			}
+			
+	.header__secondary-menu{
+			display:none;
+		}
+}//end header
+	 
+ }//end max-width 480
+@media all and (min-width: 481px) and (max-width: 959px) {
+	
+#header{
+		margin-bottom:8px;
+		padding:6px;
+		margin-top:6px;
+	
+	.region-search{
+		position:absolute;
+		width:195px;
+		right:10px;
+		top:15px;
+		
+		.block{
+			margin-bottom:0;
+		}
+		
+		.form-item{
+			margin:0;
+		}
+		
+		input#edit-submit{
+			position:relative;
+			top:7px;
+		}
+	}
+	.header__secondary-menu{
+			display:none;
+		}
+}//end header
+
+  $zen-column-count: 3;
+  
+  
+  /**
+   * The layout when there is only one sidebar, the left one.
+   */
+  .sidebar-first {
+    /* Span 2 columns, starting in 2nd column from left. */
+    #content {
+      @include zen-grid-item(2, 2);
+    }
+
+    /* Span 1 column, starting in 1st column from left. */
+    .region-sidebar-first {
+      @include zen-grid-item(1, 1);
+	   background:rgba(0,150,211, .7) url(../images/sidebar-stars.png) no-repeat 0 bottom;
+	   min-height:475px;
+	   padding:16px;
+	  	  
+		  p, h3{
+			  color:#fff;
+		  }
+    }
+  }
+
+  /**
+   * The layout when there is only one sidebar, the right one.
+   */
+  .sidebar-second {
+    /* Span 2 columns, starting in 1st column from left. */
+    #content {
+      @include zen-grid-item(2, 1);
+    }
+
+    /* Span 1 column, starting in 3rd column from left. */
+    .region-sidebar-second {
+      @include zen-grid-item(1, 3);
+    }
+  }
+
+  /**
+   * The layout when there are two sidebars.
+   */
+  .two-sidebars {
+    /* Span 2 columns, starting in 2nd column from left. */
+    #content {
+      @include zen-grid-item(2, 2);
+    }
+
+    /* Span 1 column, starting in 1st column from left. */
+    .region-sidebar-first {
+      @include zen-grid-item(1, 1);
+    }
+
+    /* Start a new row and span all 3 columns. */
+    .region-sidebar-second {
+      @include zen-grid-item(3, 1);
+      @include zen-nested-container(); // Since we're making every block in this region be a grid item.
+      @include zen-clear();
+
+      /* Apply the shared properties of grid items in a single, efficient ruleset. */
+      .block {
+        @include zen-grid-item-base();
+      }
+      /* Span 1 column, starting in the 1st column from left. */
+      .block:nth-child(3n+1) {
+        @include zen-grid-item(1, 1);
+        @include zen-clear();
+      }
+      /* Span 1 column, starting in the 2nd column from left. */
+      .block:nth-child(3n+2) {
+        @include zen-grid-item(1, 2);
+      }
+      /* Span 1 column, starting in the 3rd column from left. */
+      .block:nth-child(3n) {
+        @include zen-grid-item(1, 3);
+      }
+    }
+  }
+}
+
+/**
+ * Use 5 grid columns for larger screens.
+ */
+@media all and (min-width: 960px) {
+	
+	 #header{
+		 height:70px;
+		 position:relative;
+		 padding-top:16px;
+		  .header__logo {
+				position:relative;
+				float:left;
+				width:128px;
+			}
+			
+		.header__name-and-slogan {
+			.header__site-name {
+					font-size: 2em;
+					line-height: 1em;
+					text-transform:uppercase;
+					position:relative;
+					top:3px;
+				}
+				position:relative;
+				float: left;
+			}
+			
+			.header__region{
+					position:absolute;
+					top:0;
+					right:0;
+					width:300px;
+				}
+				
+		.region-search{
+			position:absolute;
+			width:195px;
+			right:0;
+		
+		.block{
+			margin-bottom:0;
+		}
+		
+		.form-item{
+			margin:0;
+		}
+		
+		input#edit-submit{
+			position:relative;
+			top:7px;
+		}
+	}
+				
+				.header__secondary-menu{
+					margin-top:40px;
+					position:relative;
+					z-index:25;
+					
+					ul{
+						margin:0;
+						padding:0;
+						position:relative;
+						right:-15px;
+					}
+				}
+	}
+
+ $zen-column-count: 5;
+ 	
+	 #top-banner{
+		 
+		  /* Span 3 columns, starting in 1st column from left. */
+		 #top-ban-left{
+			  @include zen-grid-item(3, 1);
+			  
+			.region-top-banner-left{
+				.block{
+					margin:0;
+				}
+				
+				ul.submit-project, ul.submit-event{
+					background:#666;
+					margin:0;
+					padding:0;
+					list-style:none;
+					text-align:center;
+					padding:16px;
+					border-radius:10px;
+					float:left;
+					width:42%;
+					margin:8px;
+					
+					li:first-child{
+						a:link, a:visited, a:active{
+							color:#fff;
+							font-weight:600;
+							text-decoration:none;
+							display:block;
+							text-transform:uppercase;
+							font-size:1.2em;
+						}
+					}
+		ul.submit-project:hover,  ul.submit-event:hover{
+			background:#eb2127;
+		}
+}
+			  .view-front-page-banner{
+				  max-width:700px;
+				  height:auto;
+				  .views-field-body{
+					  background:#eb2127;
+					  padding:16px;
+					  position:relative;
+					  top:-10px;
+					  .banner-caption{
+						  color:#fff;
+						  font-weight:600;
+						  text-align:left;
+						  
+						  em p{
+							  margin:0!important;
+						  }
+					  }
+				  }
+			  }
+			}//end region-top-banner-left  
+		 }
+		 
+		  /* Span 2 column, starting in 4th column from left. */
+		 #top-ban-right{
+			  @include zen-grid-item(2, 4);
+			  
+			  
+			  h2{
+				  border-bottom:4px solid #eb2127;
+				  text-transform:uppercase;
+				  letter-spacing:1.5px;
+			  }
+		 }
+  }
+
+#main{
+	
+}
+
+ 
+
+  /**
+   * The layout when there is only one sidebar, the left one.
+   */
+  .sidebar-first {
+    /* Span 4 columns, starting in 2nd column from left. */
+    #content {
+      @include zen-grid-item(4, 2);
+	 /* border-left:1px solid #ccc;*/
+    }
+
+    /* Span 1 column, starting in 1st column from left. */
+    .region-sidebar-first {
+      @include zen-grid-item(1, 1);
+	  background:rgba(0,100,190, .8) url(../images/sidebar-stars.png) no-repeat 0 bottom;
+	  min-height:475px;
+	  padding:16px;
+	  	  
+		  p, h3{
+			  color:#fff;
+		  }
+    }
+  }
+
+  /**
+   * The layout when there is only one sidebar, the right one.
+   */
+  .sidebar-second {
+    /* Span 4 columns, starting in 1st column from left. */
+    #content {
+      @include zen-grid-item(4, 1);
+    }
+
+    /* Span 1 column, starting in 5th column from left. */
+    .region-sidebar-second {
+      @include zen-grid-item(1, 5);
+    }
+  }
+
+  /**
+   * The layout when there are two sidebars.
+   */
+  .two-sidebars {
+    /* Span 3 columns, starting in 2nd column from left. */
+    #content {
+      @include zen-grid-item(3, 2);
+	  border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+	margin-bottom:8px;
+	
+	.view-content{
+		.item-list{
+			ul {
+				margin:0;
+				padding:0;
+				
+				li.views-row{
+					list-style:none;
+					border-right:1px solid #ccc;
+					border-left:1px solid #ccc;
+					border-bottom:1px solid #ccc;
+					margin-bottom: 12px;
+					
+						.blog-summary{
+							padding:0 8px 8px;
+							
+							p{
+								margin-bottom:0;
+							}
+						}
+						
+						.read-more{
+							display:block;
+							padding:8px;
+							text-align:right;
+						}
+						
+						h3{
+							background:#000;
+							padding:4px;
+							color:#fff;
+							margin:0;
+							letter-spacing:1px;
+						}
+						
+						h2{
+							line-height:1em;
+							margin:8px 0;
+						}
+				}
+			}//end ul
+		}
+	}
+	
+	
+	
+    }
+
+    /* Span 1 column, starting in 1st column from left. */
+    .region-sidebar-first {
+      @include zen-grid-item(1, 1);
+    }
+
+    /* Span 1 column, starting in 5th column from left. */
+    .region-sidebar-second {
+      @include zen-grid-item(1, 5);
+    }
+  }
+}
