@@ -17,6 +17,6 @@
     
 
     <div style="float:right;"><?php print $content; ?></div>
-    <div style="clear:both;></div>
+    <div style="clear:both;"></div>
   </footer>
 <?php endif; ?>
