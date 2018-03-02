@@ -89,8 +89,8 @@
 
   </div>
 
-  <?php print render($page['footer']); ?>
-
+<div>
+<?php print render($page['footer']); ?>
 </div>
 <div>
 <?php print render($page['bottom']); ?>
