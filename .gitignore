@@ -6,5 +6,4 @@
 sites/*/files
 sites/*/private
 sites/*/.sass-cache
-/sites/all/themes/zen_rsvp/.sass-cache
-.sass-cache
+files/
