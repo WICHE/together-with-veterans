@@ -21,7 +21,12 @@ cronjobs:
     service: cli
 
 environments:
-  prod:
+  master:
     routes:
       - varnish:
-        - "together-with-veterans.org" 
+        - "www.together-with-veterans.org":
+            tls-acme: 'false'
+            insecure: Redirect
+        - "together-with-veterans.org":
+            tls-acme: 'false'
+            insecure: Redirect
