@@ -25,8 +25,8 @@ environments:
     routes:
       - varnish:
         - "www.together-with-veterans.org":
-            tls-acme: 'false'
+            tls-acme: 'true'
             insecure: Redirect
         - "together-with-veterans.org":
-            tls-acme: 'false'
+            tls-acme: 'true'
             insecure: Redirect
