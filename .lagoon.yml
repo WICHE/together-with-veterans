@@ -24,6 +24,12 @@ environments:
   master:
     routes:
       - varnish:
+        - "www.togetherwithveterans.org":
+            tls-acme: 'true'
+            insecure: Redirect
+        - "togetherwithveterans.org":
+            tls-acme: 'true'
+            insecure: Redirect
         - "www.together-with-veterans.org":
             tls-acme: 'true'
             insecure: Redirect
